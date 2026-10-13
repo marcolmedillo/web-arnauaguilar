@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Arnau Aguilar, sastre bespoke 100% artesanal en Barcelona. Borrador de la nueva web.">
+<style>body{margin:0}img{max-width:100%}</style>
+<title>Arnau Aguilar Sastre</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,300;1,8..60,400&display=swap">
+<style>
+/* Layout: sitio de varias páginas (Home, Prendas x7, Tejidos, Diario + artículos). Blanco de estudio, tinta casi negra, foto grande y poco texto; sliders horizontales en Home. */
+:root{
+  --paper:#ffffff; --ink:#141414; --ink-soft:#55534f; --line:#d9d6d0; --wash:#f3f2ef; --studio:#f8fafc;
+  --thread:#9a6a2f; --chalk:#e9e6df;
+  --sans:"Source Sans 3","Source Sans Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --step-0:1.0625rem; --step-1:1.3rem; --step-2:1.75rem; --step-3:clamp(1.9rem,4.2vw,3rem);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:var(--step-0);line-height:1.65;font-weight:400}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:20px}
+.narrow{max-width:760px}
+h1,h2,h3{font-weight:300;line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1,h2{font-size:var(--step-3)} h3{font-size:var(--step-1);font-weight:600;letter-spacing:0;line-height:1.25}
+p{margin:0;max-width:65ch}
+a{color:inherit}
+figure{margin:0}
+img{display:block}
+.label{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.tbc{border-bottom:1px dashed var(--thread)}
+.note{font-size:.82rem;color:var(--ink-soft)}
+:focus-visible{outline:2px solid var(--thread);outline-offset:3px}
+
+.draftbar{background:var(--ink);color:var(--paper);font-size:.85rem;padding-block:8px}
+
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px 24px;padding-block:10px;flex-wrap:wrap}
+.logo img{height:50px;width:auto}
+nav.main{display:flex;gap:22px;flex-wrap:wrap;align-items:center;font-size:.98rem;position:relative}
+nav.main a,nav.main button{font:inherit;background:none;border:0;padding:4px 0;color:var(--ink);text-decoration:none;cursor:pointer;border-bottom:1px solid transparent;border-radius:0}
+nav.main a:hover,nav.main button:hover{border-color:var(--ink)}
+.menu{position:absolute;top:calc(100% + 14px);left:0;background:var(--paper);border:1px solid var(--line);padding:14px 20px;display:grid;gap:8px;min-width:200px}
+
+.btn{display:inline-block;font:inherit;font-weight:600;font-size:.95rem;padding:12px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;cursor:pointer;border-radius:0}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{background:var(--thread);border-color:var(--thread);color:var(--paper)}
+
+section{padding-block:clamp(48px,8vw,92px)}
+.alt{background:var(--wash)}
+.head{display:grid;gap:14px;margin-bottom:32px}
+.headrow{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.prose{display:grid;gap:16px;align-content:start}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.two > *{min-width:0}
+
+.hero{background:var(--studio)}
+.hero img{width:100%;height:min(76vh,720px);object-fit:contain}
+
+.pic{background:var(--chalk);position:relative;overflow:hidden;max-width:100%;aspect-ratio:4/5;display:block}
+.pic img{width:100%;height:100%;object-fit:cover}
+.pic.ph span{position:absolute;left:10px;bottom:10px;background:var(--paper);color:var(--thread);font-size:.72rem;padding:3px 8px;letter-spacing:.04em}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px 20px}
+figcaption{font-size:.9rem;margin-top:8px;color:var(--ink-soft)}
+
+/* Sliders */
+.track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.track::-webkit-scrollbar{display:none}
+.track > *{scroll-snap-align:start;flex:0 0 auto}
+.arrows{display:flex;gap:8px}
+.arrows button{font:inherit;width:44px;height:44px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;border-radius:0;font-size:1.1rem}
+.arrows button:hover{background:var(--ink);color:var(--paper)}
+.garment{width:min(300px,72vw);text-decoration:none;display:grid;gap:10px}
+.garment h3{font-weight:400}
+.garment:hover h3{text-decoration:underline}
+.quote{flex-basis:100%;display:grid;gap:18px;justify-items:start;padding-block:8px}
+.quote h3{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(1.5rem,3.4vw,2.4rem);line-height:1.25;max-width:24ch}
+.quote p{color:var(--ink-soft)}
+
+.houses{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:28px 36px;align-items:center}
+.houses a{display:grid;place-items:center}
+.houses img,.houselogo{max-width:100%;max-height:54px;width:auto;height:auto;filter:grayscale(1);mix-blend-mode:multiply}
+.houses a:hover img{filter:none}
+
+form{display:grid;gap:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:grid;gap:6px;font-size:.85rem;font-weight:600}
+input,select,textarea{font:inherit;font-weight:400;padding:11px 12px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:0;width:100%}
+textarea{min-height:120px;resize:vertical}
+.ok{border:2px dashed var(--thread);padding:16px;font-size:.95rem}
+.map{aspect-ratio:3/2;max-width:100%;background:
+  linear-gradient(28deg,transparent 47%,var(--paper) 47% 52%,transparent 52%),
+  linear-gradient(118deg,transparent 38%,var(--paper) 38% 41%,transparent 41%),
+  linear-gradient(118deg,transparent 66%,var(--paper) 66% 69%,transparent 69%),
+  var(--chalk);display:grid;place-items:center;text-align:center;padding:16px}
+.pin{background:var(--ink);color:var(--paper);padding:10px 14px;font-size:.88rem}
+.atelier{display:flex;gap:10px}
+.atelier img{width:110px;height:150px;object-fit:cover}
+dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;margin:0;font-size:.98rem}
+dt{color:var(--ink-soft)} dd{margin:0}
+
+.subnav{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.92rem;margin-bottom:36px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.subnav a{text-decoration:none;color:var(--ink-soft)}
+.subnav a[aria-current="page"],.subnav a:hover{color:var(--ink);text-decoration:underline}
+
+.house{display:grid;grid-template-columns:220px 1fr;gap:28px 48px;padding-block:44px;border-top:1px solid var(--line);align-items:start}
+.house > *{min-width:0}
+.house .houselogo{max-height:70px}
+.house .facts{font-size:.9rem;color:var(--ink-soft);margin-top:18px;display:grid;gap:4px}
+.swatches{display:grid;grid-template-columns:repeat(4,minmax(0,110px));gap:10px;margin-top:6px}
+.swatches div{aspect-ratio:1/1;background:var(--chalk);display:grid;place-items:center;font-size:.68rem;color:var(--thread);text-align:center;padding:4px}
+.related{display:grid;gap:0;margin-top:6px}
+.related a{border-top:1px solid var(--line);padding-block:10px;text-decoration:none;display:flex;gap:12px;justify-content:space-between;align-items:baseline}
+.related a:hover b{text-decoration:underline}
+.related b{font-weight:600}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.chip{font:inherit;font-size:.9rem;padding:8px 14px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;border-radius:0}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:36px 28px}
+.post{display:grid;gap:8px;align-content:start;text-decoration:none}
+.post .pic{aspect-ratio:3/2;margin-bottom:4px}
+.post p{font-size:.95rem;color:var(--ink-soft)}
+.post:hover h3{text-decoration:underline}
+.kw{font-size:.75rem;color:var(--thread);letter-spacing:.04em}
+.series{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:36px;padding:20px;border:1px dashed var(--thread);font-size:.88rem}
+.series b{display:block}
+
+footer{border-top:1px solid var(--line);padding-block:28px;font-size:.85rem;color:var(--ink-soft)}
+
+@media (max-width:800px){
+  .two,.house{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+  .logo img{height:40px}
+  .hero img{height:62vh}
+  .menu{position:static;border:0;padding:0 0 0 12px;flex-basis:100%}
+  .swatches{grid-template-columns:repeat(4,1fr)}
+}
+[id]{scroll-margin-top:96px}
+</style>
+</head>
+<body>
+
+
+<div class="draftbar"><div class="wrap">Borrador v3. Los recuadros con texto dorado son fotos que faltan; lo <span class="tbc" style="border-color:currentColor">subrayado</span> está por confirmar.</div></div>
+
+<header class="site"><div class="wrap bar">
+  <a class="logo" href="#home" aria-label="Arnau Aguilar, inicio"><img src="img/l-aa.png" alt="Sastre Arnau Aguilar"></a>
+  <nav class="main" aria-label="Principal">
+    <button type="button" id="prendas-btn" aria-expanded="false" aria-controls="prendas-menu">Prendas</button>
+    <div class="menu" id="prendas-menu" hidden></div>
+    <a href="#tejidos">Tejidos</a>
+    <a href="#diario">Diario</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</div></header>
+
+<main>
+
+<!-- HOME -->
+<div data-page="home">
+  <div class="hero"><img src="img/hero.jpg" alt="Arnau Aguilar sentado, vestido con un smoking hecho por él"></div>
+
+  <section id="sastre"><div class="wrap two">
+    <div class="prose">
+      <p class="label">El sastre</p>
+      <h1>Sastre Barcelona Arnau Aguilar</h1>
+      <div class="pic" style="aspect-ratio:4/3;margin-top:12px"><img src="img/arnau-corte.jpg" alt="Arnau Aguilar marcando un patrón con jaboncillo sobre el tejido"></div>
+    </div>
+    <div class="prose">
+      <p>Soy Arnau Aguilar, un sastre bespoke 100% artesanal. Basado en Barcelona, pero abierto a viajar a cualquier parte del mundo para ofrecer mis servicios donde los clientes lo necesiten.</p>
+      <p>Con un sólido bagaje adquirido en sastrerías de Barcelona de prestigio internacional, como J.M. Blasi y Santa Eulalia, ofrezco los servicios de sastrería auténtica: a medida, tradicional y artesanal.</p>
+      <p>Junto a mi equipo trabajo siguiendo el estilo más riguroso de la profesión, con ese “savoir faire” de antes, combinando artesanía, honestidad y contemporaneidad.</p>
+      <p>Ofrecemos un producto exquisito y un asesoramiento personalizado. Porque cada uno de nuestros clientes tiene necesidades distintas, pero un único objetivo: sentirse representado en su forma de vestir.</p>
+    </div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <div class="headrow"><div><p class="label">Prendas</p></div>
+      <div class="arrows"><button type="button" data-dir="-1" data-for="garments" aria-label="Prendas anteriores">←</button><button type="button" data-dir="1" data-for="garments" aria-label="Prendas siguientes">→</button></div></div>
+    <div class="track" id="garments" tabindex="0" aria-label="Prendas"></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="head"><p class="label">Tejidos</p></div>
+    <div class="houses" id="home-houses"></div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <div class="headrow"><div><p class="label">Lo que cuentan sobre nosotros</p></div>
+      <div class="arrows"><button type="button" data-dir="-1" data-for="press" aria-label="Noticia anterior">←</button><button type="button" data-dir="1" data-for="press" aria-label="Noticia siguiente">→</button></div></div>
+    <div class="track" id="press" tabindex="0" aria-label="Prensa">
+      <article class="quote"><span class="label">The New Barcelona Post</span><h3>La sastrería de alta costura de Arnau Aguilar mira al mundo desde Barcelona</h3><p>Un perfil del taller y de su vocación internacional.</p><a class="btn ghost" href="https://www.thenewbarcelonapost.com/sastreria-de-alta-costura-arnau-aguilar-mira-al-mundo-desde-barcelona/" target="_blank" rel="noopener">Leer el artículo</a></article>
+      <article class="quote"><span class="label">Sinabrochar</span><h3>Conociendo a Arnau Aguilar, en Barcelona</h3><p>La crónica de un encargo, de la toma de medidas a la primera prueba.</p><a class="btn ghost" href="https://www.sinabrochar.com/conociendo-a-arnau-aguilar-en-barcelona/" target="_blank" rel="noopener">Leer el artículo</a></article>
+      <article class="quote"><span class="label">Museu Tèxtil de Terrassa</span><h3>Visita a la sastreria d’Arnau Aguilar</h3><p>El museo visita el taller y repasa su formación y su forma de trabajar.</p><a class="btn ghost" href="https://museutextil.cat/visita-a-la-sastreria-darnau-aguilar/" target="_blank" rel="noopener">Leer el artículo</a></article>
+    </div>
+  </div></section>
+
+  <section id="contacto"><div class="wrap two">
+    <div class="prose">
+      <p class="label">Contacto</p>
+      <h2>Escríbeme</h2>
+      <form id="contactform">
+        <div class="row">
+          <label for="c-nombre">Nombre<input id="c-nombre" required autocomplete="name"></label>
+          <label for="c-mail">Email<input id="c-mail" type="email" required autocomplete="email"></label>
+        </div>
+        <div class="row">
+          <label for="c-tel">Teléfono (opcional)<input id="c-tel" type="tel" autocomplete="tel"></label>
+          <label for="c-motivo">Motivo<select id="c-motivo"><option>Quiero encargar una prenda</option><option>Quiero concertar una cita en el taller</option><option>Consulta sobre tejidos o precios</option><option>Prensa y colaboraciones</option><option>Otro</option></select></label>
+        </div>
+        <label for="c-prenda">Prenda<select id="c-prenda"><option>Traje</option><option>Abrigo</option><option>Chaqueta</option><option>Pantalón</option><option>Camisa</option><option>Pijama</option><option>Bata</option><option>Otra o no aplica</option></select></label>
+        <label for="c-msg">Mensaje<textarea id="c-msg" required placeholder="Cuéntame qué tienes en mente y para cuándo lo necesitas."></textarea></label>
+        <button class="btn" type="submit" style="justify-self:start">Enviar mensaje</button>
+      </form>
+      <div class="ok" id="c-ok" hidden></div>
+    </div>
+    <div class="prose">
+      <div class="map" role="img" aria-label="Mapa de la ubicación del taller"><div><div class="pin">Plaça Narcís Oller 7 · 08006 Barcelona</div><p class="note" style="margin-top:10px">Aquí va el mapa de Google integrado.</p></div></div>
+      <a class="btn ghost" style="justify-self:start" href="https://www.google.com/maps/search/?api=1&query=Pla%C3%A7a+Narc%C3%ADs+Oller+7+08006+Barcelona" target="_blank" rel="noopener">Abrir en Google Maps</a>
+      <dl>
+        <dt>Taller</dt><dd>Plaça Narcís Oller 7, 08006 Barcelona</dd>
+        <dt>Teléfono</dt><dd>+34 654 229 282</dd>
+        <dt>Email</dt><dd>sastre@arnauaguilar.com</dd>
+        <dt>Instagram</dt><dd><a href="https://www.instagram.com/sastre_arnauaguilar/" target="_blank" rel="noopener">@sastre_arnauaguilar</a></dd>
+        <dt>Horario</dt><dd><span class="tbc">Con cita previa</span></dd>
+      </dl>
+      <div class="atelier"><img src="img/atelier2.jpg" alt="Entrada del taller"><img src="img/atelier1.jpg" alt="Escaparate del taller"><img src="img/atelier3.jpg" alt="Interior del taller"></div>
+      <p class="note">Las fotos del atelier que tenemos son miniaturas; hacen falta en alta resolución.</p>
+    </div>
+  </div></section>
+</div>
+
+<!-- PRENDA -->
+<div data-page="prenda" hidden>
+  <section><div class="wrap">
+    <nav class="subnav" id="prenda-subnav" aria-label="Prendas"></nav>
+    <div class="two" style="margin-bottom:48px">
+      <div class="prose"><p class="label">Prendas</p><h1 id="prenda-title"></h1></div>
+      <div class="prose" id="prenda-text"></div>
+    </div>
+    <div class="photos" id="prenda-photos"></div>
+    <div id="prenda-posts" style="margin-top:56px"></div>
+    <p style="margin-top:48px"><a class="btn ghost" href="#contacto">Contactar con Arnau</a></p>
+  </div></section>
+</div>
+
+<!-- TEJIDOS -->
+<div data-page="tejidos" hidden>
+  <section><div class="wrap">
+    <div class="two" style="margin-bottom:36px">
+      <div class="head" style="margin:0"><p class="label">Tejidos</p><h1>Las casas de tejidos con las que trabajamos</h1>
+      <p>Estas son las principales casas de tejidos con las que trabajamos. En el taller tenemos sus muestrarios y asesoramos en la selección del tejido, el gramaje y el dibujo para cada prenda.</p></div>
+      <div class="pic" style="aspect-ratio:4/3"><img src="img/tejidos.jpg" alt="Muestrarios de tejidos abiertos sobre la mesa del taller"></div>
+    </div>
+    <div id="houses"></div>
+  </div></section>
+</div>
+
+<!-- DIARIO -->
+<div data-page="diario" hidden>
+  <section><div class="wrap">
+    <div class="head"><p class="label">Diario</p><h1>Sobre el oficio, los tejidos y lo que sale del taller</h1></div>
+    <div class="series">
+      <div><b>Encargos</b>Una prenda terminada, con sus fotos, tejido y detalles. Una al mes: sale sola del trabajo del taller.</div>
+      <div><b>Guías</b>Respuestas largas a lo que la gente busca en Google. Una al mes.</div>
+      <div><b>Casas de tejidos</b>Historia y tejidos de cada fabricante. Se enlazan desde la página de Tejidos. Una por trimestre.</div>
+      <div><b>Glosario</b>Un término del oficio explicado en 150 palabras. Cuando surja.</div>
+    </div>
+    <p class="note" style="margin-bottom:20px">El recuadro de arriba y las búsquedas en dorado son notas de trabajo: no aparecerían en la web final.</p>
+    <div class="chips" id="cats"></div>
+    <div class="posts" id="posts"></div>
+  </div></section>
+</div>
+
+<!-- ARTÍCULO -->
+<div data-page="post" hidden>
+  <section><div class="wrap narrow prose">
+    <p class="label"><a href="#diario">Diario</a> · <span id="post-cat"></span></p>
+    <h1 id="post-title"></h1>
+    <div id="post-img"></div>
+    <div class="prose" id="post-body"></div>
+    <div class="related" id="post-links"></div>
+    <p><a href="#diario">Volver al diario</a></p>
+  </div></section>
+</div>
+
+</main>
+
+<footer><div class="wrap bar">
+  <span>© Sastre Arnau Aguilar · Barcelona</span>
+  <span>ES · EN</span>
+</div></footer>
+
+<script>
+(function(){
+  var PRENDAS={
+    trajes:{t:'Trajes',c:'traje3',p:['El traje es la prenda más rigurosa del oficio. Lo hacemos de dos o tres piezas, recto o cruzado, desde el traje de diario hasta el chaqué y el smoking.','Cada traje parte de un patrón individual y se monta a mano, con las pruebas necesarias hasta que el hombro, el cuello y la caída quedan en su sitio. También trajes de novio y de ceremonia.'],
+      f:[['traje3','Traje de tres piezas en príncipe de Gales'],['hero','Smoking'],['novio','Traje de novio con chaleco'],['cruzado-raya','Cruzado de raya diplomática'],['chaleco','Chaleco y pantalón']]},
+    abrigos:{t:'Abrigos',c:'abrigo',p:['Abrigos de paño, gabardinas y tabardos, cortados para llevarse sobre la americana sin tirar del hombro ni de la manga.','Trabajamos lana, cashmere y mezclas de peso, con forro entero o medio forro según el uso y el clima.'],
+      f:[['abrigo','Abrigo de paño'],['abrigo-largo','Abrigo largo cruzado'],['abrigo-piel','Abrigo con cuello de piel'],[null,'Gabardina']]},
+    chaquetas:{t:'Chaquetas',c:'americana-cruzada',p:['Americanas sueltas, tebas, saharianas y sobrecamisas, para hombre y para mujer. Es la prenda con la que mucha gente descubre la sastrería a medida.','El hombro puede ser natural o estructurado, los bolsillos de parche o de vivo, y la chaqueta puede ir sin forro para el verano.'],
+      f:[['americana-cruzada','Americana cruzada'],['americana-mujer','Americana de mujer estampada'],['chaqueta-cuadros','Americana de cuadros'],['chaqueta-pico','Americana con solapa de pico, en prueba'],['sobrecamisa','Sobrecamisa'],['ante','Sobrecamisa de ante']]},
+    pantalones:{t:'Pantalones',c:'pantalon-pana',p:['Pantalones con o sin pinzas, de tiro alto o medio, con cinturilla clásica o ajustadores laterales. Y faldas y bermudas a medida.','En lana, franela, pana, algodón o lino, con vuelta o bajo liso.'],
+      f:[['pantalon-pana','Pantalón de pana'],['falda','Falda'],['bermudas','Bermudas'],[null,'Pantalón de franela']]},
+    camisas:{t:'Camisas',c:null,p:['Camisas con patrón propio para cuello, hombro y manga. Una vez ajustado, el patrón sirve para todos los encargos siguientes.','Popelín, oxford, sarga o lino, con el cuello y el puño que mejor acompañen a cada persona y a cada traje.'],
+      f:[[null,'Camisa blanca'],[null,'Camisa de rayas'],[null,'Detalle de cuello']]},
+    pijamas:{t:'Pijamas',c:null,p:['Pijamas de dos piezas cortados como una prenda de sastre, con vivos en contraste.','En algodón, lino o seda, con vivos y botones a elegir.'],
+      f:[[null,'Pijama de rayas'],[null,'Pijama liso con vivos'],[null,'Detalle de vivo']]},
+    batas:{t:'Batas',c:null,p:['Batas de casa con cuello chal y cinturón, en lana fina, seda o algodón.','El forro puede ir en contraste y la bata puede hacerse a juego con el pijama.'],
+      f:[[null,'Bata de lana'],[null,'Bata de seda'],[null,'Detalle de cuello chal']]}
+  };
+  var HOUSES=[
+    {id:'loropiana',n:'Loro Piana',where:'Quarona, Piamonte (Italia) · 1924',url:'https://www.loropiana.com',
+     p:['Los Loro Piana comerciaban con lana en Trivero desde principios del siglo XIX. En 1924 el ingeniero Pietro Loro Piana fundó la empresa actual en Quarona, en el valle del Sesia, donde sigue su sede.','Es la referencia mundial en fibras nobles: cashmere, baby cashmere, vicuña y merinos extrafinos. En los años setenta, Sergio y Pier Luigi Loro Piana desarrollaron el Tasmanian, una lana ligera que se ha convertido en un clásico del traje. Desde 2013 forma parte del grupo LVMH y en 2024 celebró su centenario.']},
+    {id:'scabal',n:'Scabal',where:'Bruselas (Bélgica) · 1938',url:'https://www.scabal.com',
+     p:['Otto Hertz fundó Scabal en Bruselas en 1938 como comerciante de paños. El nombre es un acrónimo: Société Commerciale Anglo Belgo Allemande Luxembourgeoise.','La mayor parte de sus tejidos se teje en su propia fábrica de Huddersfield, en Inglaterra, y la casa tiene tienda en Savile Row desde hace más de cincuenta años. Sus telas han vestido a personajes del cine como los de Marlon Brando en El Padrino o Robert De Niro en Casino.']},
+    {id:'vbc',n:'Vitale Barberis Canonico',where:'Pratrivero, Biella (Italia) · 1663',url:'https://www.vitalebarberiscanonico.it',
+     p:['El primer documento que acredita la actividad lanera de la familia Barberis Canonico en Pratrivero es de 1663. Más de 350 años después, la fábrica sigue en manos de la misma familia y es miembro de Les Hénokiens, la asociación de empresas familiares bicentenarias.','Produce varios millones de metros de tejido de lana al año y conserva un archivo histórico de muestras que arranca en el siglo XIX. Sus lanas de traje y sus franelas son un estándar del oficio por regularidad y por equilibrio entre calidad y precio.']},
+    {id:'drapers',n:'Drapers',where:'Bolonia (Italia) · 1956',url:'https://www.drapersitaly.it',tbcurl:1,
+     p:['La familia Lolli fundó Drapers en Bolonia en 1956. No es una fábrica, sino una casa editora: selecciona y distribuye tejidos exclusivos para sastres de una veintena de países.','Destaca por sus lanas ligeras y de alta torsión, que resisten la arruga y funcionan bien para viajar y para el verano. Desde 2018 pertenece al lanificio Vitale Barberis Canonico.']},
+    {id:'hfw',n:'Huddersfield Fine Worsteds',where:'Yorkshire (Inglaterra) · 1976',url:'https://www.hfwltd.com',
+     p:['Huddersfield Fine Worsteds nació en 1976 de la unión de varias casas históricas del paño inglés: Hardy Minnis (1890), proveedora de la Casa Real británica desde los años treinta; Hunt & Winterbotham, con raíces en un molino de Gloucestershire documentado en 1532; y Martin Sons & Co, fundada en la década de 1840.','Fue Martin Sons quien inventó en 1907 el Fresco, un tejido de hilo muy torcido y ligamento abierto que deja pasar el aire y que sigue fabricándose con la misma receta. Son paños con cuerpo, que mantienen la raya y envejecen bien.']},
+    {id:'caccioppoli',n:'Caccioppoli',where:'Nápoles (Italia) · 1920',url:'https://www.caccioppoli.com',tbcurl:1,
+     p:['Caccioppoli vende tejidos en Nápoles desde 1920 y hoy la dirige la cuarta generación de la familia. Es comerciante, no fabricante: encarga sus diseños a las mejores tejedurías y los mantiene en stock para los sastres.','Aproximadamente la mitad de sus tejidos son diseños exclusivos. Su fuerte es el color y el dibujo para americanas, con mezclas de lana, seda y lino que resumen el gusto de la sastrería napolitana. También ofrece camisería.']},
+    {id:'gorina',n:'Gorina',where:'Sabadell (Cataluña) · 1835',url:'https://gorinacloth.es/es/',
+     p:['Joan Gorina i Morató puso en marcha su industria lanera en Sabadell en 1835, con 21 años. En 1865 incorporó a sus hijos y la casa pasó a llamarse Joan Gorina i Fills; dos años después ganó una medalla de bronce en la Exposición Universal de París por sus tejidos de lana.','Es una de las fábricas de paños más antiguas de España y la tradición textil de casa: tejido hecho a pocos kilómetros del taller.']}
+  ];
+  var CATS=['Encargos','Guías','Casas de tejidos','Glosario'];
+  var POSTS=[
+    {id:'ante',cat:'Encargos',t:'Una sobrecamisa de ante sin forro',ex:'Cómo se corta y se cose una piel tan fina para que caiga como una camisa.',img:'ante',prenda:'chaquetas',
+      body:['<span class="tbc">Texto de ejemplo, a completar con los datos reales del encargo.</span>','Una sobrecamisa de ante no se puede hilvanar ni descoser como una de lana: cada puntada deja marca. Por eso la prueba se hace antes en un tejido de ensayo y la piel se corta una sola vez.','Va sin forro, con un bolsillo de parche y botones de cuerno. Se lleva sobre una camisa o un jersey fino, como una chaqueta de entretiempo.']},
+    {id:'cruzado',cat:'Encargos',t:'Un cruzado de raya diplomática',ex:'Solapa de pico ancha, seis botones y forro azul.',img:'cruzado-raya',prenda:'trajes'},
+    {id:'abrigo-largo',cat:'Encargos',t:'Un abrigo largo cruzado en gris',ex:'Un abrigo pensado para llevarse por debajo de la rodilla.',img:'abrigo-largo',prenda:'abrigos'},
+    {id:'bespoke',cat:'Guías',t:'Traje a medida en Barcelona: qué significa bespoke y qué no',ex:'Confección, medida industrial y bespoke, explicados sin jerga.',kw:'traje a medida barcelona',img:'chaqueta-pico',prenda:'trajes',
+      body:['«A medida» se usa para tres cosas muy distintas, y la diferencia se nota en el precio, en el plazo y sobre todo en cómo sienta la prenda.','<b>Confección con arreglos.</b> Un traje de talla estándar al que se le ajustan largos y cintura. Rápido y económico, pero el hombro y el equilibrio de la chaqueta no se pueden tocar.','<b>Medida industrial (made to measure).</b> Se parte de un patrón base de fábrica y se modifica con tus medidas. Eliges tejido y detalles. No hay prueba hilvanada: la prenda llega terminada.','<b>Bespoke.</b> El sastre dibuja un patrón solo para ti, corta el tejido a mano y monta la prenda en varias pruebas. En la primera, la chaqueta va hilvanada y todavía se puede cambiar casi todo: la caída del hombro, la altura del cuello, la apertura de la solapa.','¿Cuándo compensa el bespoke? Cuando tu cuerpo no encaja en un patrón estándar, cuando quieres una prenda que no existe en tienda o cuando buscas algo que dure muchos años y se pueda ajustar por el camino.']},
+    {id:'plazos',cat:'Guías',t:'Cuánto se tarda en hacer un traje, prueba a prueba',ex:'Qué pasa en cada visita al taller y con cuánta antelación conviene encargar.',kw:'cuánto tarda un traje a medida',prenda:'trajes'},
+    {id:'novio',cat:'Guías',t:'Traje de novio a medida: cuándo empezar y qué decidir',ex:'Calendario, tejidos según la fecha y cómo volver a usarlo después de la boda.',kw:'traje de novio a medida barcelona',img:'novio',prenda:'trajes'},
+    {id:'super',cat:'Guías',t:'Super 100s, 130s, 150s: cómo leer la etiqueta de un tejido',ex:'Por qué un número más alto no siempre es mejor para el traje de diario.',kw:'super 120s significado'},
+    {id:'teba',cat:'Guías',t:'La teba: la chaqueta española sin estructura',ex:'Origen, cómo se corta y con qué combinarla en ciudad.',kw:'chaqueta teba a medida',prenda:'chaquetas'},
+    {id:'mujer',cat:'Guías',t:'Sastrería a medida para mujer',ex:'Americanas, pantalones y faldas con patrón propio.',kw:'sastre a medida mujer barcelona',img:'americana-mujer',prenda:'chaquetas'},
+    {id:'cuidado',cat:'Guías',t:'Cómo cuidar un traje de lana para que dure veinte años',ex:'Cepillo, percha, descanso y tintorería solo cuando toca.',kw:'cómo cuidar un traje de lana'},
+    {id:'fresco',cat:'Casas de tejidos',t:'Fresco: el tejido de verano que Huddersfield inventó en 1907',ex:'Hilo muy torcido y ligamento abierto: por qué sigue siendo la mejor lana para el calor.',kw:'tejido fresco lana verano',house:'hfw',
+      body:['En 1907 la casa Martin Sons & Co, de Huddersfield, registró un tejido pensado para un problema muy concreto: llevar traje de lana cuando hace calor.','La solución fue doble. Por un lado, un hilo de estambre con mucha torsión, que queda seco y con nervio. Por otro, un ligamento de tafetán abierto, poroso, que deja pasar el aire. El resultado no es una lana fina: es una lana que respira.','Más de un siglo después, Huddersfield Fine Worsteds lo sigue tejiendo con la misma receta. No se arruga, aguanta un viaje en la maleta y recupera la forma colgado una noche. Para un verano en Barcelona es difícil encontrar algo mejor.']},
+    {id:'vbc1663',cat:'Casas de tejidos',t:'Vitale Barberis Canonico: tejiendo lana desde 1663',ex:'La historia de la fábrica familiar de Biella y qué tejidos suyos usamos más.',kw:'vitale barberis canonico tejidos',house:'vbc'},
+    {id:'gorina1835',cat:'Casas de tejidos',t:'Gorina, la lana de Sabadell',ex:'De 1835 a hoy: la casa catalana que sigue tejiendo cerca del taller.',kw:'gorina tejidos sabadell',house:'gorina'},
+    {id:'vicuna',cat:'Casas de tejidos',t:'Loro Piana y las fibras nobles: cashmere, baby cashmere y vicuña',ex:'Qué diferencia a cada fibra y para qué prenda merece la pena.',kw:'loro piana tejidos cashmere',house:'loropiana'},
+    {id:'napoles',cat:'Casas de tejidos',t:'Caccioppoli y el color napolitano',ex:'Por qué las americanas de verano más alegres salen de un muestrario de Nápoles.',kw:'caccioppoli tejidos',house:'caccioppoli'},
+    {id:'hilvan',cat:'Glosario',t:'Hilván',ex:'La costura provisional de hilo blanco que sostiene la prenda en la primera prueba.'},
+    {id:'entretela',cat:'Glosario',t:'Entretela',ex:'La capa interior que da forma al pecho y a la solapa de una chaqueta.'},
+    {id:'pico',cat:'Glosario',t:'Solapa de pico',ex:'La solapa que apunta hacia el hombro, propia de cruzados y trajes de ceremonia.'}
+  ];
+
+  function pic(src,alt,extra){return src?'<div class="pic"'+(extra||'')+'><img src="img/'+src+'.jpg" alt="'+alt+'" loading="lazy"></div>':'<div class="pic ph"'+(extra||'')+'><span>Falta foto: '+alt+'</span></div>';}
+  function postLink(p){return '<a href="#post-'+p.id+'"><b>'+p.t+'</b><span class="note">'+p.cat+'</span></a>';}
+  var $=function(id){return document.getElementById(id)};
+  var pages=document.querySelectorAll('[data-page]'),menu=$('prendas-menu'),btn=$('prendas-btn'),sub=$('prenda-subnav');
+
+  Object.keys(PRENDAS).forEach(function(k){
+    [menu,sub].forEach(function(n){var a=document.createElement('a');a.href='#prendas-'+k;a.textContent=PRENDAS[k].t;n.appendChild(a);});
+  });
+  $('garments').innerHTML=Object.keys(PRENDAS).map(function(k){var d=PRENDAS[k];return '<a class="garment" href="#prendas-'+k+'">'+pic(d.c,d.t)+'<h3>'+d.t+'</h3></a>';}).join('');
+  $('home-houses').innerHTML=HOUSES.map(function(h){return '<a href="#casa-'+h.id+'"><img src="img/l-'+h.id+'.png" alt="'+h.n+'"></a>';}).join('');
+  $('houses').innerHTML=HOUSES.map(function(h){
+    var rel=POSTS.filter(function(p){return p.house===h.id});
+    return '<article class="house" id="casa-'+h.id+'"><div><img class="houselogo" src="img/l-'+h.id+'.png" alt="'+h.n+'"><div class="facts"><span>'+h.where+'</span><a href="'+h.url+'" target="_blank" rel="noopener"'+(h.tbcurl?' class="tbc"':'')+'>Web de '+h.n+' ↗</a></div></div>'+
+      '<div class="prose"><h2>'+h.n+'</h2>'+h.p.map(function(p){return '<p>'+p+'</p>'}).join('')+
+      '<div class="swatches"><div>Falta foto de muestra</div><div>Falta foto de muestra</div><div>Falta foto de muestra</div><div>Falta foto de muestra</div></div>'+
+      (rel.length?'<div><p class="label" style="margin-top:14px">En el diario</p><div class="related">'+rel.map(postLink).join('')+'</div></div>':'')+
+      '</div></article>';
+  }).join('');
+
+  var cat='Todo';
+  function renderPosts(){
+    $('cats').innerHTML=['Todo'].concat(CATS).map(function(c){return '<button type="button" class="chip" aria-pressed="'+(c===cat)+'" data-cat="'+c+'">'+c+'</button>'}).join('');
+    $('posts').innerHTML=POSTS.filter(function(p){return cat==='Todo'||p.cat===cat}).map(function(p){
+      return '<a class="post" href="#post-'+p.id+'">'+(p.img?pic(p.img,p.t):'')+'<span class="label">'+p.cat+'</span><h3>'+p.t+'</h3><p>'+p.ex+'</p>'+(p.kw?'<span class="kw">'+p.kw+'</span>':'')+'</a>';
+    }).join('');
+  }
+  renderPosts();
+  $('cats').addEventListener('click',function(e){var b=e.target.closest('.chip');if(b){cat=b.dataset.cat;renderPosts();}});
+
+  function show(hash,scroll){
+    var id=(hash||'').replace('#','')||'home',page=id,anchor=null;
+    if(id==='contacto'||id==='sastre'){page='home';anchor=id;}
+    else if(id.indexOf('casa-')===0){page='tejidos';anchor=id;}
+    else if(id.indexOf('prendas-')===0){
+      var k=id.slice(8),d=PRENDAS[k];
+      if(!d){page='home';}else{
+        page='prenda';
+        $('prenda-title').textContent=d.t;
+        $('prenda-text').innerHTML=d.p.map(function(p){return '<p>'+p+'</p>'}).join('');
+        $('prenda-photos').innerHTML=d.f.map(function(f){return '<figure>'+pic(f[0],f[1])+(f[0]?'<figcaption>'+f[1]+'</figcaption>':'')+'</figure>'}).join('');
+        var rel=POSTS.filter(function(p){return p.prenda===k});
+        $('prenda-posts').innerHTML=rel.length?'<p class="label">En el diario</p><div class="related">'+rel.map(postLink).join('')+'</div>':'';
+        sub.querySelectorAll('a').forEach(function(a){a.getAttribute('href')==='#'+id?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
+      }
+    }
+    else if(id.indexOf('post-')===0){
+      var p=POSTS.filter(function(x){return x.id===id.slice(5)})[0];
+      if(!p){page='diario';}else{
+        page='post';
+        $('post-cat').textContent=p.cat;$('post-title').textContent=p.t;
+        $('post-img').innerHTML=p.img?pic(p.img,p.t,' style="aspect-ratio:3/2"'):'';
+        $('post-body').innerHTML=p.body?p.body.map(function(x){return '<p>'+x+'</p>'}).join(''):'<p>'+p.ex+'</p><p class="note">Borrador pendiente de escribir.</p>';
+        var links='';
+        if(p.house){var h=HOUSES.filter(function(x){return x.id===p.house})[0];links+='<a href="#casa-'+h.id+'"><b>'+h.n+'</b><span class="note">Tejidos</span></a>';}
+        if(p.prenda){links+='<a href="#prendas-'+p.prenda+'"><b>'+PRENDAS[p.prenda].t+'</b><span class="note">Prendas</span></a>';}
+        $('post-links').innerHTML=links;
+      }
+    }
+    var found=false;pages.forEach(function(el){var on=el.dataset.page===page;el.hidden=!on;if(on)found=true;});
+    if(!found){pages.forEach(function(el){el.hidden=el.dataset.page!=='home'});}
+    menu.hidden=true;btn.setAttribute('aria-expanded','false');
+    if(scroll){var t=anchor&&$(anchor);if(t)t.scrollIntoView({block:'start'});else window.scrollTo(0,0);}
+  }
+  btn.addEventListener('click',function(){menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));});
+  document.addEventListener('click',function(e){
+    var arrow=e.target.closest&&e.target.closest('.arrows button');
+    if(arrow){var tr=$(arrow.dataset.for),first=tr.firstElementChild;if(first){var step=first.getBoundingClientRect().width+20;tr.scrollBy({left:step*Number(arrow.dataset.dir),behavior:'smooth'});}return;}
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');
+    if(a){e.preventDefault();var h=a.getAttribute('href');try{history.replaceState(null,'',h)}catch(_){}show(h,true);return;}
+    if(!e.target.closest('#prendas-btn,#prendas-menu')){menu.hidden=true;btn.setAttribute('aria-expanded','false');}
+  });
+  window.addEventListener('hashchange',function(){show(location.hash,true)});
+  show(location.hash,false);
+
+  $('contactform').addEventListener('submit',function(e){
+    e.preventDefault();var ok=$('c-ok');
+    ok.textContent='Demo: en este borrador el mensaje no se envía. Motivo elegido: «'+$('c-motivo').value+'». En la web real, el motivo decide la respuesta automática; si el cliente pide cita, recibirá opciones de día y hora.';
+    ok.hidden=false;
+  });
+})();
+</script>
+
+</body>
+</html>
